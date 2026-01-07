@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuminaBooks | Premium Summaries</title>
+    <title>LuminaBooks | Premium Library</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -65,7 +65,7 @@
         <div class="glass p-4 rounded-2xl flex items-center gap-4 audio-player-visible">
             <div class="flex flex-col">
                 <span class="text-[10px] uppercase tracking-tighter text-blue-300 font-bold">Reading Mood</span>
-                <span id="now-playing" class="text-xs opacity-70 italic">Ambient Track</span>
+                <span id="now-playing" class="text-xs opacity-70 italic truncate w-32">Ambient Track</span>
             </div>
             <button onclick="toggleAudio()" id="audioBtn" class="bg-blue-500 hover:bg-blue-400 p-3 rounded-full shadow-lg transition-all">
                 <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -77,11 +77,10 @@
     <div id="grid-container" class="max-w-6xl mx-auto">
         <header class="text-center mb-16">
             <h1 class="text-6xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">LuminaBooks</h1>
-            <p class="text-gray-400 text-lg">Select a masterpiece to begin your journey.</p>
+            <p class="text-gray-400 text-lg">Knowledge curated. Atmosphere included.</p>
         </header>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" id="book-grid">
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" id="book-grid"></div>
     </div>
 
     <div id="detail-container" class="detail-view max-w-5xl mx-auto mt-6">
@@ -90,25 +89,24 @@
         </button>
         
         <div class="glass rounded-[2rem] overflow-hidden flex flex-col lg:flex-row shadow-2xl">
-            <div class="lg:w-2/5 relative group">
-                <img id="detail-img" src="" alt="" class="w-full h-full object-cover">
+            <div class="lg:w-2/5 relative">
+                <img id="detail-img" src="" alt="" class="w-full h-full object-cover min-h-[400px]">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
             
-            <div class="lg:w-3/5 p-8 md:p-14 overflow-y-auto max-h-[80vh]">
-                <h2 id="detail-title" class="text-5xl font-extrabold mb-2"></h2>
+            <div class="lg:w-3/5 p-8 md:p-14 overflow-y-auto max-h-[85vh]">
+                <h2 id="detail-title" class="text-4xl md:text-5xl font-extrabold mb-2"></h2>
                 <p id="detail-author" class="text-2xl text-blue-400 mb-10 font-medium"></p>
                 
                 <div class="space-y-10">
                     <section>
                         <h3 class="text-xs uppercase tracking-[0.3em] text-white/40 font-bold mb-6">Key Takeaways</h3>
-                        <ul id="detail-points" class="space-y-4">
-                            </ul>
+                        <ul id="detail-points" class="space-y-4 text-white/90"></ul>
                     </section>
 
                     <section>
                         <h3 class="text-xs uppercase tracking-[0.3em] text-white/40 font-bold mb-6">Deep Dive Summary</h3>
-                        <p id="detail-summary" class="text-white/70 leading-relaxed text-lg font-light italic"></p>
+                        <p id="detail-summary" class="text-white/70 leading-relaxed text-lg font-light"></p>
                     </section>
                 </div>
             </div>
@@ -119,53 +117,133 @@
         const books = [
             {
                 id: 1,
-                title: "Atomic Habits",
-                author: "James Clear",
-                image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=800",
-                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                trackName: "Lo-Fi Focus",
-                points: ["Habits are the compound interest of self-improvement", "Forget about goals, focus on systems instead", "Environment matters more than motivation"],
-                summary: "This book explores the power of tiny changes. By understanding how the brain forms routines, you can design an environment that makes success inevitable. It's not about one giant leap, but about 1% improvements every single day."
+                title: "48 Laws of Power",
+                author: "Robert Greene",
+                image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+                trackName: "Strategic Ambience",
+                points: ["Never outshine the master", "Conceal your intentions", "Always say less than necessary", "Guard your reputation", "Court attention at all costs", "Get others to do the work for you", "Make people come to you", "Win through actions, never argument", "Avoid the unhappy and unlucky", "Keep people dependent on you"],
+                summary: "This book is a comprehensive guide to the mechanics of power and influence in social and professional hierarchies. Robert Greene draws from 3,000 years of history to distill lessons from figures like Machiavelli and Sun Tzu. The core premise is that power is an amoral game that is always being played, whether you participate or not. It teaches readers how to observe the world with a strategic eye rather than an emotional one. By understanding these laws, you can protect yourself from manipulation by others. It emphasizes the importance of self-control, discretion, and psychological warfare. Some laws may seem ruthless, but they are presented as timeless truths about human behavior. Ultimately, the book is about mastery over oneself and one's environment. It serves as both a defensive shield and an offensive manual for navigating high-stakes social circles."
             },
             {
                 id: 2,
-                title: "The Alchemist",
-                author: "Paulo Coelho",
-                image: "https://images.unsplash.com/photo-1589998059171-988d887df646?auto=format&fit=crop&q=80&w=800",
+                title: "Men Are from Mars, Women Are from Venus",
+                author: "John Gray",
+                image: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?q=80&w=800",
                 track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                trackName: "Desert Winds",
-                points: ["When you want something, the universe conspires to help you", "Fear is a bigger obstacle than the obstacle itself", "The treasure is often right where you started"],
-                summary: "A mystical story of Santiago, an Andalusian shepherd boy who yearns to travel in search of a worldly treasure. His journey teaches us about the essential wisdom of listening to our hearts and following our dreams."
+                trackName: "Harmony Melodies",
+                points: ["Different emotional needs", "Competence vs Communication", "The 'Cave' phenomenon", "Empathy over Solutions", "Giving advice vs Trust", "Speaking different languages", "Scoring small gestures", "Asking for support", "Acceptance of nature", "Patience in translation"],
+                summary: "John Gray’s classic relationship guide posits that men and women are so different they might as well be from different planets. By using this metaphor, he helps couples understand why communication often breaks down. He explains that men feel validated when they solve problems, while women feel validated when they are emotionally supported. The 'cave' and the 'well' represent how each gender deals with stress differently. The book provides a vocabulary for couples to express their needs without causing defensiveness. It highlights that most conflicts arise because we expect our partners to react exactly like we do. Understanding these psychological differences leads to greater patience and less resentment. Small changes in how we speak can have a massive impact on relationship quality. It encourages readers to stop trying to change their partners and start understanding them."
             },
             {
                 id: 3,
-                title: "Meditation",
-                author: "Marcus Aurelius",
-                image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=800",
+                title: "How to Win Friends and Influence People",
+                author: "Dale Carnegie",
+                image: "https://images.unsplash.com/photo-1550517355-38f1fdb24227?q=80&w=800",
                 track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-                trackName: "Stoic Calm",
-                points: ["You have power over your mind, not outside events", "The soul becomes dyed with the color of its thoughts", "Live as if you were dying right now"],
-                summary: "The private writings of the Roman Emperor Marcus Aurelius, offering a series of spiritual exercises and reflections developed as he struggled to understand himself and make sense of the universe."
+                trackName: "Charisma Beats",
+                points: ["Don't criticize or complain", "Give sincere appreciation", "Arouse an eager want", "Become genuinely interested", "Remember their name", "Be a good listener", "Talk in their interests", "Make them feel important", "Avoid arguments", "Admit mistakes quickly"],
+                summary: "This timeless bestseller focuses on the idea that success comes from how well we handle people. Dale Carnegie argues that technical skill is secondary to the ability to lead and inspire others. The book teaches that you can make more friends in two months by being interested in others than in two years of trying to get them interested in you. It emphasizes the power of a smile and the importance of making others feel significant. Carnegie’s principles are rooted in fundamental human psychology and the need for ego-validation. By avoiding direct conflict and showing respect for others' opinions, you gain their cooperation. The book advocates for positive reinforcement rather than punishment or critique. It provides practical techniques for changing people's minds without giving offense. Ultimately, it is a guide on how to be more likable and persuasive in any social setting."
+            },
+            {
+                id: 4,
+                title: "Art of Seduction",
+                author: "Robert Greene",
+                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                trackName: "Mystique Vibes",
+                points: ["Soft power psychology", "Identify victim types", "Create mystery", "Mixed signals", "Master insinuation", "Enter their spirit", "Pleasure-pain cycle", "Use symbols", "Stir up anxiety", "Never be aggressive"],
+                summary: "Robert Greene explores the most subtle and effective form of power: the ability to lead people by their emotions. He breaks down seducers into nine types, such as the Siren, the Rake, and the Charismatic. The book argues that seduction is not just about romance, but about influence in politics and social life. It focuses on how to create an irresistible persona that draws others in. By understanding human vulnerabilities and insecurities, a seducer can manipulate the target's perception. The process involves a slow build-up of tension and the strategic use of absence. It teaches that directness is the enemy of desire, as it leaves no room for the imagination. Every chapter provides historical examples of how famous figures seduced entire nations or individuals. The book is often seen as provocative because it treats human attraction as a calculated game."
+            },
+            {
+                id: 5,
+                title: "The Laws of Human Nature",
+                author: "Robert Greene",
+                image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+                trackName: "Observation Mode",
+                points: ["Master emotional self", "Transform self-love", "Observe masks", "Determine character", "Beware fragile egos", "Elevate perspective", "Play to self-interest", "Change attitude", "Confront shadow self", "Remember mortality"],
+                summary: "This book is a deep dive into the hidden forces that drive human behavior. Robert Greene encourages readers to become 'social observers' rather than victims of their own impulses. It explains that humans are inherently irrational and governed by ancient evolutionary traits. By understanding these 'laws,' we can better predict how others will react in any given situation. The book teaches how to detach yourself from your emotions to make more objective decisions. It explores concepts like narcissism, groupthink, and the persona we project to the world. Each law is illustrated with a detailed biography of a historical figure who succeeded or failed because of it. The ultimate goal is to develop a superior level of social intelligence. It challenges readers to look inward and address their own flaws and biases."
+            },
+            {
+                id: 6,
+                title: "Thinking, Fast and Slow",
+                author: "Daniel Kahneman",
+                image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+                trackName: "Cognitive Flow",
+                points: ["System 1 vs System 2", "Substitution bias", "Anchoring effect", "Loss aversion", "Hindsight bias", "Planning fallacy", "WYSIATI principle", "Overconfidence illusion", "Peak-End Rule", "Choice framing"],
+                summary: "Nobel Prize winner Daniel Kahneman explains the psychological biases that affect our decision-making. He introduces two systems: System 1, which is emotional and automatic, and System 2, which is logical and effortful. The book shows how System 1 often makes mistakes that System 2 is too lazy to correct. It explores why we make irrational choices in finance, medicine, and personal life. Concepts like 'framing' show how the way a question is asked changes our answer. Kahneman highlights that even experts are susceptible to overconfidence and cognitive illusions. The book challenges the traditional economic view that humans are 'rational actors.' By understanding these mental flaws, we can learn to slow down and think more clearly. It provides a toolkit for identifying when we are being misled by our own intuition."
+            },
+            {
+                id: 7,
+                title: "Man’s Search for Meaning",
+                author: "Viktor Frankl",
+                image: "https://images.unsplash.com/photo-1491843351663-8c39edeb5f3a?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+                trackName: "Resilience Piano",
+                points: ["Choose your attitude", "Meaning in work/love", "Find the 'Why'", "Inner freedom", "Focus on future", "Life expects duty", "Apathy as defense", "Unique purpose", "Happiness ensues", "Logotherapy focus"],
+                summary: "Viktor Frankl, a psychiatrist and Holocaust survivor, reflects on his experiences in Nazi concentration camps. He observes that prisoners who found a reason to live were the ones most likely to survive. The first half of the book is a harrowing account of camp life, focusing on the psychological state of the inmates. The second half introduces his theory of Logotherapy, which focuses on the search for meaning. Frankl argues that the primary human drive is not pleasure or power, but the discovery of purpose. He believes that even in the most painful circumstances, humans have the freedom to choose their attitude. This 'inner freedom' is what makes life meaningful regardless of external fate. The book serves as a powerful testament to the resilience of the human spirit. It teaches that we find meaning by being responsible for our own existence."
+            },
+            {
+                id: 8,
+                title: "7 Habits of Highly Effective People",
+                author: "Stephen Covey",
+                image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+                trackName: "Effective Mindset",
+                points: ["Be Proactive", "Begin with end in mind", "First things first", "Think Win-Win", "Seek to understand first", "Synergize", "Sharpen the saw", "Independence shift", "Character vs Personality", "North Star principles"],
+                summary: "Stephen Covey presents a principle-centered approach to personal and professional effectiveness. He argues that lasting success comes from a foundation of character rather than quick-fix techniques. The 'Inside-Out' approach means changing yourself before trying to change others. The first three habits focus on self-mastery and moving from dependence to independence. The next three habits focus on working with others and achieving interdependence. The final habit is about continuous growth and self-renewal across all areas of life. Covey uses a 'Time Management Matrix' to help readers focus on high-impact activities. The book encourages readers to develop a personal mission statement to guide their choices. It emphasizes that true leadership starts with empathy and understanding others' perspectives."
+            },
+            {
+                id: 9,
+                title: "Ikigai",
+                author: "García & Miralles",
+                image: "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
+                trackName: "Zen Nature",
+                points: ["The intersection of 4 areas", "Never truly retire", "Take it slow", "The 80% eating rule", "Surround with friends", "Gentle daily movement", "Smile daily", "Reconnect with nature", "Give thanks", "Live in the moment"],
+                summary: "This book explores the Japanese secret to a long and happy life, specifically from the 'Blue Zone' of Okinawa. 'Ikigai' translates to 'a reason for being' or the reason you get out of bed in the morning. The authors interviewed centenarians to discover their daily habits and mindsets. They found that longevity is tied to a combination of diet, community, and having a clear purpose. The book emphasizes the importance of 'flow'—being completely immersed in a task. It advocates for a stress-free lifestyle and staying busy with meaningful work. The 80% eating rule prevents the body from being overtaxed by digestion. Gentle exercises like Yoga or Tai Chi are preferred over high-intensity workouts for long-term health. Reconnecting with nature is seen as essential for maintaining mental clarity and peace."
+            },
+            {
+                id: 10,
+                title: "Sapiens",
+                author: "Yuval Noah Harari",
+                image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
+                trackName: "Evolutionary Bass",
+                points: ["Cognitive Revolution", "Shared fictions", "Agricultural fraud", "Mass cooperation", "Empire success", "Scientific revolution", "Capitalism as religion", "Happiness vs Evolution", "End of Sapiens", "Powerful but directionless"],
+                summary: "Yuval Noah Harari traces the history of our species from the Stone Age to the modern day. He argues that what makes Sapiens unique is our ability to believe in things that don't physically exist. These 'shared fictions,' like laws and human rights, allow millions of strangers to work together. The book covers three major revolutions: Cognitive, Agricultural, and Scientific. Harari suggests that the transition to farming actually made life harder for the average person. He explores how money became the most successful 'story' ever told, uniting the globe. The book also examines the dark side of human progress, including the extinction of other species. It questions whether all our technological advances have actually made us happier. The narrative moves at a fast pace, combining history, biology, and philosophy."
+            },
+            {
+                id: 11,
+                title: "The Five Love Languages",
+                author: "Gary Chapman",
+                image: "https://images.unsplash.com/photo-1516589174184-c6858675e3ff?q=80&w=800",
+                track: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                trackName: "Heart Strings",
+                points: ["Identify primary language", "Words of Affirmation", "Acts of Service", "Receiving Gifts", "Quality Time", "Physical Touch", "Learn partner's language", "Keep love tank full", "Love is a choice", "Bridging emotional gaps"],
+                summary: "Dr. Gary Chapman’s book provides a simple yet profound framework for improving any romantic relationship. He argues that people often miss each other's expressions of love because they speak different 'languages.' For example, one partner might provide gifts, while the other only feels loved through quality time. By identifying your own language and your partner's, you can bridge the emotional gap. The book provides quizzes and real-life examples of couples who saved their marriages by switching languages. It emphasizes that you must often express love in a way that feels unnatural to you. Chapman notes that the 'falling in love' phase is temporary, but 'real love' is a deliberate choice. Filling your partner's 'love tank' leads to a more peaceful and supportive home."
             }
         ];
 
         function initGrid() {
             const grid = document.getElementById('book-grid');
             grid.innerHTML = books.map(book => `
-                <div class="book-card glass rounded-[2rem] p-5 cursor-pointer" onclick="openDetails(${book.id})">
-                    <div class="overflow-hidden rounded-2xl mb-6 shadow-2xl h-80">
+                <div class="book-card glass rounded-[2rem] p-5 cursor-pointer flex flex-col h-full" onclick="openDetails(${book.id})">
+                    <div class="overflow-hidden rounded-2xl mb-6 shadow-2xl h-80 flex-shrink-0">
                         <img src="${book.image}" alt="${book.title}" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-2xl font-bold mb-1">${book.title}</h3>
-                    <p class="text-white/40 font-medium">${book.author}</p>
+                    <div class="flex-grow">
+                        <h3 class="text-2xl font-bold mb-1 line-clamp-2">${book.title}</h3>
+                        <p class="text-white/40 font-medium">${book.author}</p>
+                    </div>
                 </div>
             `).join('');
         }
 
         function openDetails(id) {
             const book = books.find(b => b.id === id);
-            
-            // Set Text/Images
             document.getElementById('detail-img').src = book.image;
             document.getElementById('detail-title').innerText = book.title;
             document.getElementById('detail-author').innerText = book.author;
@@ -175,33 +253,24 @@
             const pointsList = document.getElementById('detail-points');
             pointsList.innerHTML = book.points.map(p => `
                 <li class="flex items-start gap-3">
-                    <span class="text-blue-400 mt-1">✦</span>
-                    <span class="text-white/80">${p}</span>
+                    <span class="text-blue-400 mt-1 flex-shrink-0">✦</span>
+                    <span class="text-white/80 leading-snug">${p}</span>
                 </li>`).join('');
 
-            // Set Unique Audio
             const music = document.getElementById('bgMusic');
             music.src = book.track;
-            music.pause(); // Reset player
+            music.pause();
             updateAudioIcon(false);
 
-            // Toggle Visibility
             document.getElementById('grid-container').classList.add('hidden');
-            const detailContainer = document.getElementById('detail-container');
-            detailContainer.style.display = 'block';
-            
-            // Show Audio Player
+            document.getElementById('detail-container').style.display = 'block';
             document.getElementById('audio-container').classList.remove('hidden');
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function closeDetails() {
-            // Stop Music
             const music = document.getElementById('bgMusic');
             music.pause();
-            
-            // UI Toggle
             document.getElementById('grid-container').classList.remove('hidden');
             document.getElementById('detail-container').style.display = 'none';
             document.getElementById('audio-container').classList.add('hidden');
